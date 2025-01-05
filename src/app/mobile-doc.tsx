@@ -1,6 +1,6 @@
 import { Bell, House } from 'lucide-react';
 import Link from "next/link";
-import CheckUserButton from "./check-user-button";
+import CheckUserButton from "../components/check-user-button";
 import { auth } from "@/lib/auth";
 
 

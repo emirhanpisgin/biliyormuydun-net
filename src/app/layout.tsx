@@ -13,7 +13,7 @@ const geistMono = Geist_Mono({
 });
 
 export const metadata: Metadata = {
-    title: "Nextjs Starter",
+    title: "Biliyor Muydun?",
     description: "Built by emirhanpisgin",
 };
 

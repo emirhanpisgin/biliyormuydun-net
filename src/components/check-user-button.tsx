@@ -12,12 +12,12 @@ export default function CheckUserButton({ authorized }: CheckUserButtonProps) {
     if (authorized) {
         return (
             <Link href="/profile">
-                <User className="size-8 text-foreground drop-shadow active:drop-shadow-none active:scale-90 transition-all duration-75" />
+                <User className="size-8 text-foreground transition-all duration-75" />
             </Link>
         );
     }
 
     return (
-        <LogIn onClick={() => signIn()} className="size-8 text-foreground drop-shadow active:drop-shadow-none active:scale-90 transition-all duration-75" />
+        <LogIn onClick={() => signIn()} className="size-8 text-foreground transition-all duration-75" />
     );
 }

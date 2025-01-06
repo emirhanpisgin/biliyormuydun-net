@@ -2,7 +2,7 @@ import { House } from "lucide-react";
 import Link from "next/link";
 import CheckUserButton from "../components/check-user-button";
 import { auth } from "@/lib/auth";
-import ModeToggle from "@/components/mode-toggle-mobile";
+import ModeToggleMobile from "@/components/mode-toggle-mobile";
 
 
 export default async function MobileDoc() {
@@ -15,7 +15,7 @@ export default async function MobileDoc() {
                 <Link href="/">
                     <House className="size-8 text-foreground transition-all" />
                 </Link>
-                <ModeToggle />
+                <ModeToggleMobile />
             </div>
         </div>
     );

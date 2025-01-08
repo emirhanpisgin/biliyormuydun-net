@@ -5,9 +5,13 @@ import Google from "next-auth/providers/google";
 import { uploadUserImage } from "@/helpers/uploadthing";
 import { updateUser } from "@/data-access/users";
 import { toUsername } from "./utils";
+import { accounts, users } from "@/db/schema";
 
 export const { handlers, signIn, signOut, auth } = NextAuth({
-	adapter: DrizzleAdapter(database),
+	adapter: DrizzleAdapter(database, {
+		usersTable: users,
+		accountsTable: accounts,
+	}),
 	providers: [Google],
 	events: {
 		async createUser(user) {

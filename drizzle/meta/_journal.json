@@ -15,6 +15,13 @@
       "when": 1736190382107,
       "tag": "0001_mysterious_killmonger",
       "breakpoints": true
+    },
+    {
+      "idx": 2,
+      "version": "7",
+      "when": 1736344173551,
+      "tag": "0002_narrow_hex",
+      "breakpoints": true
     }
   ]
 }

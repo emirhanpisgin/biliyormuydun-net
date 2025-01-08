@@ -6,10 +6,13 @@ export const users = pgTable("user", {
 		.primaryKey()
 		.$defaultFn(() => crypto.randomUUID()),
 	name: text("name"),
-    username: text("username").unique(),
+	nameChangedAt: timestamp("nameChangedAt", { mode: "date" }),
+	username: text("username").unique(),
+	usernameChangedAt: timestamp("usernameChangedAt", { mode: "date" }),
 	email: text("email").unique(),
 	emailVerified: timestamp("emailVerified", { mode: "date" }),
 	image: text("image"),
+	imageChangedAt: timestamp("imageChangedAt", { mode: "date" }),
 });
 
 export const accounts = pgTable(

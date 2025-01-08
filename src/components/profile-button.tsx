@@ -10,7 +10,7 @@ interface CheckUserButtonProps {
     user: Session["user"];
 }
 
-export default function CheckUserButton({ user }: CheckUserButtonProps) {
+export default function ProfileButton({ user }: CheckUserButtonProps) {
     if (user) {
         return (
             <Drawer>

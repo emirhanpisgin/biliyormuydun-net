@@ -1,9 +1,9 @@
 "use client";
 import { LogIn, Pencil, User } from "lucide-react";
 import { signIn } from "next-auth/react";
-import { Drawer, DrawerContent, DrawerTrigger } from "./ui/drawer";
-import { DialogDescription, DialogTitle } from "./ui/dialog";
-import { Button } from "./ui/button";
+import { Drawer, DrawerContent, DrawerTrigger } from "../components/ui/drawer";
+import { DialogDescription, DialogTitle } from "../components/ui/dialog";
+import { Button } from "../components/ui/button";
 import { Session } from "next-auth";
 
 interface CheckUserButtonProps {

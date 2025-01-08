@@ -1,6 +1,6 @@
 import { House } from "lucide-react";
 import Link from "next/link";
-import ProfileButton from "../components/profile-button";
+import ProfileButton from "./profile-button";
 import { auth } from "@/lib/auth";
 import ModeToggleMobile from "@/components/mode-toggle-mobile";
 

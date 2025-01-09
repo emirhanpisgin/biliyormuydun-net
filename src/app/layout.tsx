@@ -6,6 +6,7 @@ import MobileDoc from "@/app/mobile-doc";
 import { NextSSRPlugin } from "@uploadthing/react/next-ssr-plugin";
 import { extractRouterConfig } from "uploadthing/server";
 import { ourFileRouter } from "./api/uploadthing/core";
+import { Toaster } from "@/components/ui/toaster";
 
 const geistSans = Geist({
     variable: "--font-geist-sans",
@@ -39,6 +40,7 @@ export default function RootLayout({
                 <Providers>
                     {children}
                     <MobileDoc />
+                    <Toaster />
                 </Providers>
             </body>
         </html>

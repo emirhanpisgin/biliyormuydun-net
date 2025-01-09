@@ -17,3 +17,7 @@ export async function uploadUserImage(imageUrl: string, userId: string) {
     
 	return fileUrl;
 }
+
+export function imageURLToKey(imageUrl: string) {
+    return imageUrl.split("/").pop()!;
+}

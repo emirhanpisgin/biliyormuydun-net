@@ -1,5 +1,6 @@
 "use client";
 
+import { SessionProvider } from "next-auth/react";
 import { ThemeProvider } from "next-themes";
 
 export default function Providers({ children }: { children: React.ReactNode; }) {
@@ -9,7 +10,9 @@ export default function Providers({ children }: { children: React.ReactNode; }) 
             defaultTheme="dark"
             disableTransitionOnChange={true}
         >
-            {children}
+            <SessionProvider>
+                {children}
+            </SessionProvider>
         </ThemeProvider>
     );
 }

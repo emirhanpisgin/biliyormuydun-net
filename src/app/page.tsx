@@ -1,7 +1,10 @@
-export default function Home() {
+import MaxWidthWrapper from "@/components/max-width-wrapper";
+import Navbar from "./navbar";
+
+export default async function Home() {
     return (
-        <div>
-            Hello, World!
-        </div>
+        <MaxWidthWrapper className="relative">
+            <Navbar />
+        </MaxWidthWrapper>
     );
 }

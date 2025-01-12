@@ -1,5 +1,5 @@
 import { database } from "@/db";
-import { UpdateUser, users } from "@/db/schema";
+import { UpdateUser, users } from "@/db/schema/users";
 import { eq } from "drizzle-orm";
 
 export async function updateUser(userId: string, newData: UpdateUser) {

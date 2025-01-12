@@ -23,3 +23,6 @@ export const usersRelations = relations(users, ({ many }) => ({
 	authenticators: many(authenticators),
     accounts: many(accounts),
 }));
+
+export type User = typeof users.$inferSelect;
+export type UpdateUser = Omit<typeof users.$inferInsert, "id">;

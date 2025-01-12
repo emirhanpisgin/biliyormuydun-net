@@ -1,7 +1,7 @@
 "use client";
-import { ArrowLeft, ArrowUpFromLine, Camera, LoaderCircle, LogIn, Pencil, Plus, Save, User as UserIcon } from "lucide-react";
+import { ArrowLeft, ArrowUpFromLine, Camera, LoaderCircle, LogIn, Pencil, Save, User as UserIcon } from "lucide-react";
 import { signIn, useSession } from "next-auth/react";
-import { Drawer, DrawerContent, DrawerTrigger, DrawerHeader } from "../../components/ui/drawer";
+import { Drawer, DrawerContent, DrawerTrigger } from "../../components/ui/drawer";
 import { DialogDescription, DialogHeader, DialogTitle } from "../../components/ui/dialog";
 import { Button, buttonVariants } from "../../components/ui/button";
 import { Dispatch, SetStateAction, useState } from "react";
@@ -33,7 +33,7 @@ export default function ProfileButton({ initialUser }: ProfileButtonProps) {
         return (
             <Drawer onClose={() => setIsSettingsOpen(false)}>
                 <DrawerTrigger>
-                    <UserIcon className="size-8 lg:size-9 text-foreground transition-all duration-75" />
+                    <UserIcon className="size-8 text-foreground transition-all duration-75" />
                 </DrawerTrigger>
                 <DrawerContent>
                     <ProfileContent user={user} isSettingsOpen={isSettingsOpen} setIsSettingsOpen={setIsSettingsOpen} update={() => update()} isDesktop={isDesktop} />
@@ -46,7 +46,7 @@ export default function ProfileButton({ initialUser }: ProfileButtonProps) {
         return (
             <Sheet>
                 <SheetTrigger>
-                    <UserIcon className="size-8 lg:size-9 text-foreground transition-all duration-75" />
+                    <UserIcon className="size-8 text-foreground transition-all duration-75" />
                 </SheetTrigger>
                 <SheetContent>
                     <ProfileContent user={user} isSettingsOpen={isSettingsOpen} setIsSettingsOpen={setIsSettingsOpen} update={() => update()} isDesktop={isDesktop} />

@@ -1,5 +1,5 @@
 "use client";
-import { ArrowLeft, ArrowUpFromLine, Camera, LoaderCircle, LogIn, Pencil, Save, User as UserIcon } from "lucide-react";
+import { ArrowLeft, ArrowUpFromLine, Camera, LoaderCircle, LogIn, Pencil, Save, User as UserIcon, X } from "lucide-react";
 import { signIn, useSession } from "next-auth/react";
 import { Drawer, DrawerContent, DrawerTrigger } from "../../components/ui/drawer";
 import { DialogDescription, DialogHeader, DialogTitle } from "../../components/ui/dialog";
@@ -14,7 +14,7 @@ import { Input } from "@/components/ui/input";
 import { User } from "@/db/schema/users";
 import { useToast } from "@/hooks/use-toast";
 import { useMediaQuery } from "@/hooks/use-media-query";
-import { Sheet, SheetContent, SheetDescription, SheetHeader, SheetTitle, SheetTrigger } from "@/components/ui/sheet";
+import { Sheet, SheetContent, SheetDescription, SheetHeader, SheetTitle, SheetTrigger, SheetClose } from "@/components/ui/sheet";
 import { cn } from "@/lib/utils";
 
 interface ProfileButtonProps {
@@ -90,6 +90,11 @@ function ProfileContent({ user, isSettingsOpen, setIsSettingsOpen, update, isDes
                     {isSettingsOpen ? <ArrowLeft className="!size-5 lg:!size-6" /> : <Pencil className="!size-5 lg:!size-6" />}
                 </Button>
             </div>
+            <div className={cn("absolute top-0 right-0 p-2", isDesktop ? "block" : "hidden")}>
+                <SheetClose className={buttonVariants({ size: "icon", variant: "outline"})}>
+                    <X className="!size-5 lg:!size-6"/>
+                </SheetClose>
+            </div>
             {isDesktop ? (
                 <SheetHeader>
                     <SheetTitle className="text-center text-3xl pt-2">
@@ -109,7 +114,6 @@ function ProfileContent({ user, isSettingsOpen, setIsSettingsOpen, update, isDes
                     </DialogDescription>
                 </DialogHeader>
             )}
-
             {
                 !isSettingsOpen ? (<>
                     <ProfilePhoto url={user.image!} />
@@ -129,8 +133,8 @@ function ProfileContent({ user, isSettingsOpen, setIsSettingsOpen, update, isDes
                             content={{
                                 button({ ready, isUploading }) {
                                     if (isUploading) return <ArrowUpFromLine className="animate-pulse lg:!size-6" />;
-                                    if (ready) return <Camera className="lg:!size-6"/>;
-                                    return <LoaderCircle className="lg:!size-6 animate-spin"/>
+                                    if (ready) return <Camera className="lg:!size-6" />;
+                                    return <LoaderCircle className="lg:!size-6 animate-spin" />
                                 }
                             }}
                             appearance={{
@@ -151,7 +155,7 @@ function ProfileContent({ user, isSettingsOpen, setIsSettingsOpen, update, isDes
                                 <Input disabled={isChangeNamePending} className="mt-1 lg:text-xl" placeholder="İsim" value={name} onChange={(e) => setName(e.target.value)} />
                             </Label>
                             <Button size={"icon"} disabled={isChangeNamePending || name === user.name} onClick={() => executeChangeName(name)}>
-                                {isChangeNamePending ? <LoaderCircle className="animate-spin lg:!size-6" /> : <Save className="lg:!size-6"/>}
+                                {isChangeNamePending ? <LoaderCircle className="animate-spin lg:!size-6" /> : <Save className="lg:!size-6" />}
                             </Button>
                         </div>
                         <div>
@@ -160,7 +164,7 @@ function ProfileContent({ user, isSettingsOpen, setIsSettingsOpen, update, isDes
                                 <Input spellCheck={false} disabled={isChangeUsernamePending} className="mt-1 lg:text-xl" placeholder="Kullanıcı Adı" value={username} onChange={(e) => setUsername(e.target.value)} />
                             </Label>
                             <Button size={"icon"} disabled={isChangeUsernamePending || username === user.username} onClick={() => executeChangeUsername(username)}>
-                                {isChangeUsernamePending ? <LoaderCircle className="animate-spin lg:!size-6" /> : <Save className="lg:!size-6"/>}
+                                {isChangeUsernamePending ? <LoaderCircle className="animate-spin lg:!size-6" /> : <Save className="lg:!size-6" />}
                             </Button>
                         </div>
                     </div>

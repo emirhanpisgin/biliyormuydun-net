@@ -1,7 +1,7 @@
 "use client";
-import { ArrowLeft, ArrowUpFromLine, Camera, LoaderCircle, LogIn, Pencil, Save, User as UserIcon, X } from "lucide-react";
-import { signIn, useSession } from "next-auth/react";
-import { Drawer, DrawerContent, DrawerTrigger } from "../../components/ui/drawer";
+import { ArrowLeft, ArrowUpFromLine, Camera, Dot, Ellipsis, LoaderCircle, LogIn, LogOut, Pencil, Save, User as UserIcon, X } from "lucide-react";
+import { signIn, signOut, useSession } from "next-auth/react";
+import { Drawer, DrawerClose, DrawerContent, DrawerTrigger } from "@/components/ui/drawer";
 import { DialogDescription, DialogHeader, DialogTitle } from "../../components/ui/dialog";
 import { Button, buttonVariants } from "../../components/ui/button";
 import { Dispatch, SetStateAction, useState } from "react";
@@ -16,6 +16,7 @@ import { useToast } from "@/hooks/use-toast";
 import { useMediaQuery } from "@/hooks/use-media-query";
 import { Sheet, SheetContent, SheetDescription, SheetHeader, SheetTitle, SheetTrigger, SheetClose } from "@/components/ui/sheet";
 import { cn } from "@/lib/utils";
+import { DropdownMenu, DropdownMenuContent, DropdownMenuItem, DropdownMenuLabel, DropdownMenuSeparator, DropdownMenuTrigger } from "@/components/ui/dropdown-menu";
 
 interface ProfileButtonProps {
     initialUser: User;
@@ -85,16 +86,24 @@ function ProfileContent({ user, isSettingsOpen, setIsSettingsOpen, update, isDes
 
     return (
         <div className="relative -z-10 w-full flex flex-col items-center">
-            <div className={cn("absolute top-0 p-2", isDesktop ? "left-0" : "right-0")}>
-                <Button size={"icon"} variant={"outline"} onClick={() => setIsSettingsOpen(state => !state)}>
-                    {isSettingsOpen ? <ArrowLeft className="!size-5 lg:!size-6" /> : <Pencil className="!size-5 lg:!size-6" />}
-                </Button>
+            <div className="absolute flex gap-1 top-0 right-0 p-2">
+                <DropdownMenu>
+                    <DropdownMenuTrigger className={buttonVariants({ size: "icon", variant: "ghost" })}>
+                        <Ellipsis />
+                    </DropdownMenuTrigger>
+                    <DropdownMenuContent>
+                        <DropdownMenuItem onClick={() => setIsSettingsOpen(!isSettingsOpen)}>
+                            {isSettingsOpen ? (<><ArrowLeft /> Geri Dön</>) : (<><Pencil /> Düzenle</>)}
+
+                        </DropdownMenuItem>
+                        <DropdownMenuSeparator />
+                        <DropdownMenuItem className="text-red-600" onClick={() => signOut()}>
+                            <LogOut /> Çıkış Yap
+                        </DropdownMenuItem>
+                    </DropdownMenuContent>
+                </DropdownMenu>
             </div>
-            <div className={cn("absolute top-0 right-0 p-2", isDesktop ? "block" : "hidden")}>
-                <SheetClose className={buttonVariants({ size: "icon", variant: "outline"})}>
-                    <X className="!size-5 lg:!size-6"/>
-                </SheetClose>
-            </div>
+
             {isDesktop ? (
                 <SheetHeader>
                     <SheetTitle className="text-center text-3xl pt-2">
@@ -114,8 +123,8 @@ function ProfileContent({ user, isSettingsOpen, setIsSettingsOpen, update, isDes
                     </DialogDescription>
                 </DialogHeader>
             )}
-            {
-                !isSettingsOpen ? (<>
+            {!isSettingsOpen ?
+                (<>
                     <ProfilePhoto url={user.image!} />
                     <div className="flex flex-col items-center py-2">
                         <div className="font-semibold text-2xl">
@@ -126,21 +135,21 @@ function ProfileContent({ user, isSettingsOpen, setIsSettingsOpen, update, isDes
                         </div>
                     </div>
                 </>) : (<>
-                    <div className="relative">
+                    <div className="relative pt-3">
                         <ProfilePhoto url={user.image!} />
                         <UploadButton
                             endpoint={"profilePhotoUploader"}
                             content={{
                                 button({ ready, isUploading }) {
                                     if (isUploading) return <ArrowUpFromLine className="animate-pulse lg:!size-6" />;
-                                    if (ready) return <Camera className="lg:!size-6" />;
+                                    if (ready) return <Pencil className="size-6" />;
                                     return <LoaderCircle className="lg:!size-6 animate-spin" />
                                 }
                             }}
                             appearance={{
                                 allowedContent: "hidden",
                                 container: "bg-transparent",
-                                button: buttonVariants({ size: "icon", variant: "outline", className: "!rounded-full lg:p-5" }),
+                                button: buttonVariants({ size: "icon" }),
                             }}
                             className="absolute -bottom-1 -right-1 cursor-pointer"
                             onClientUploadComplete={() => {
@@ -148,20 +157,20 @@ function ProfileContent({ user, isSettingsOpen, setIsSettingsOpen, update, isDes
                             }}
                         />
                     </div>
-                    <div className="flex flex-col items-center gap-2 mb-12 *:flex *:items-end *:gap-2">
-                        <div>
-                            <Label className="text-xl">
+                    <div className="flex flex-col items-center gap-2 mb-12 px-5 *:flex *:items-end *:gap-2 w-full">
+                        <div className="w-full flex">
+                            <Label className="text-xl w-full flex-1">
                                 İsim
-                                <Input disabled={isChangeNamePending} className="mt-1 lg:text-xl" placeholder="İsim" value={name} onChange={(e) => setName(e.target.value)} />
+                                <Input disabled={isChangeNamePending} className="mt-1 lg:text-base" placeholder="İsim" value={name} onChange={(e) => setName(e.target.value)} />
                             </Label>
                             <Button size={"icon"} disabled={isChangeNamePending || name === user.name} onClick={() => executeChangeName(name)}>
                                 {isChangeNamePending ? <LoaderCircle className="animate-spin lg:!size-6" /> : <Save className="lg:!size-6" />}
                             </Button>
                         </div>
-                        <div>
-                            <Label className="text-xl">
+                        <div className="w-full flex">
+                            <Label className="text-xl w-full flex-1">
                                 Kullanıcı Adı
-                                <Input spellCheck={false} disabled={isChangeUsernamePending} className="mt-1 lg:text-xl" placeholder="Kullanıcı Adı" value={username} onChange={(e) => setUsername(e.target.value)} />
+                                <Input spellCheck={false} disabled={isChangeUsernamePending} className="mt-1 lg:text-base w-full" placeholder="Kullanıcı Adı" value={username} onChange={(e) => setUsername(e.target.value)} />
                             </Label>
                             <Button size={"icon"} disabled={isChangeUsernamePending || username === user.username} onClick={() => executeChangeUsername(username)}>
                                 {isChangeUsernamePending ? <LoaderCircle className="animate-spin lg:!size-6" /> : <Save className="lg:!size-6" />}

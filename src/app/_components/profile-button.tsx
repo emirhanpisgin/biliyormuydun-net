@@ -34,7 +34,7 @@ export default function ProfileButton({ initialUser }: ProfileButtonProps) {
         return (
             <Drawer onClose={() => setIsSettingsOpen(false)}>
                 <DrawerTrigger>
-                    <UserIcon className="size-8 text-foreground transition-all duration-75" />
+                    <UserIcon className="size-8 lg:size-7 text-foreground transition-all duration-75" />
                 </DrawerTrigger>
                 <DrawerContent>
                     <ProfileContent user={user} isSettingsOpen={isSettingsOpen} setIsSettingsOpen={setIsSettingsOpen} update={() => update()} isDesktop={isDesktop} />
@@ -47,7 +47,7 @@ export default function ProfileButton({ initialUser }: ProfileButtonProps) {
         return (
             <Sheet>
                 <SheetTrigger>
-                    <UserIcon className="size-8 text-foreground transition-all duration-75" />
+                    <UserIcon className="size-8 lg:size-7 text-foreground transition-all duration-75" />
                 </SheetTrigger>
                 <SheetContent>
                     <ProfileContent user={user} isSettingsOpen={isSettingsOpen} setIsSettingsOpen={setIsSettingsOpen} update={() => update()} isDesktop={isDesktop} />

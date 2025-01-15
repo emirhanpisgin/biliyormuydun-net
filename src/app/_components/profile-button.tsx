@@ -1,7 +1,7 @@
 "use client";
-import { ArrowLeft, ArrowUpFromLine, Camera, Dot, Ellipsis, LoaderCircle, LogIn, LogOut, Pencil, Save, User as UserIcon, X } from "lucide-react";
+import { ArrowLeft, ArrowUpFromLine, Ellipsis, LoaderCircle, LogIn, LogOut, Pencil, Save, User as UserIcon } from "lucide-react";
 import { signIn, signOut, useSession } from "next-auth/react";
-import { Drawer, DrawerClose, DrawerContent, DrawerTrigger } from "@/components/ui/drawer";
+import { Drawer, DrawerContent, DrawerTrigger } from "@/components/ui/drawer";
 import { DialogDescription, DialogHeader, DialogTitle } from "../../components/ui/dialog";
 import { Button, buttonVariants } from "../../components/ui/button";
 import { Dispatch, SetStateAction, useState } from "react";
@@ -14,12 +14,12 @@ import { Input } from "@/components/ui/input";
 import { User } from "@/db/schema/users";
 import { useToast } from "@/hooks/use-toast";
 import { useMediaQuery } from "@/hooks/use-media-query";
-import { Sheet, SheetContent, SheetDescription, SheetHeader, SheetTitle, SheetTrigger, SheetClose } from "@/components/ui/sheet";
-import { cn } from "@/lib/utils";
+import { Sheet, SheetContent, SheetDescription, SheetHeader, SheetTitle, SheetTrigger } from "@/components/ui/sheet";
 import { DropdownMenu, DropdownMenuContent, DropdownMenuItem, DropdownMenuLabel, DropdownMenuSeparator, DropdownMenuTrigger } from "@/components/ui/dropdown-menu";
+import { Session } from "next-auth";
 
 interface ProfileButtonProps {
-    initialUser: User;
+    initialUser?: Session["user"];
 }
 
 export default function ProfileButton({ initialUser }: ProfileButtonProps) {

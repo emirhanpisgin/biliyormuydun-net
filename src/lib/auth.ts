@@ -1,5 +1,5 @@
 import { database } from "@/db";
-import NextAuth from "next-auth";
+import NextAuth, { User } from "next-auth";
 import { DrizzleAdapter } from "@auth/drizzle-adapter";
 import Google from "next-auth/providers/google";
 import { uploadUserImage } from "@/helpers/uploadthing";
@@ -7,11 +7,12 @@ import { updateUser } from "@/data-access/users";
 import { toUsername } from "./utils";
 import { accounts, users } from "@/db/schema";
 
+
 export const { handlers, signIn, signOut, auth } = NextAuth({
 	adapter: DrizzleAdapter(database, {
 		usersTable: users,
 		accountsTable: accounts,
-	}),
+	}) as any,
 	providers: [Google],
 	events: {
 		async createUser(user) {
@@ -27,9 +28,12 @@ export const { handlers, signIn, signOut, auth } = NextAuth({
 			});
 		},
 	},
+    session: {
+        strategy: "database"
+    },
 	callbacks: {
 		async session({ session, user }) {
-			session.user.username = user.username;
+			session.user = user;
 			return session;
 		},
 	},

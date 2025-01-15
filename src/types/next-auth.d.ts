@@ -1,14 +1,7 @@
 import NextAuth from "next-auth";
-import { Session, User } from "next-auth";
+import { Session } from "next-auth";
+import { User as UserSchemaType } from "@/db/schema/users";
 
 declare module "next-auth" {
-	interface Session extends Session {
-        user: Session["user"] & {
-            username?: string;
-        };
-	}
-
-    interface User extends User {
-        username?: string;
-    }
+	interface User extends UserSchemaType {}
 }

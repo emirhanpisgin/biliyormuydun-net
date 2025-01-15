@@ -1,4 +1,4 @@
-import { House } from "lucide-react";
+import { AppWindow, House } from "lucide-react";
 import Link from "next/link";
 import ProfileButton from "./profile-button";
 import { auth } from "@/lib/auth";
@@ -15,6 +15,11 @@ export default async function MobileDoc() {
                     <House className="size-8 text-foreground transition-all" />
                 </Link>
                 <ModeToggle />
+                {session?.user?.role === "admin" && (
+                    <Link href="/dashboard">
+                        <AppWindow className="size-8"/>
+                    </Link>
+                )}
             </div>
         </div>
     );

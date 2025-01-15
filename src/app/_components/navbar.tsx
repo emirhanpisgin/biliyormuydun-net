@@ -1,5 +1,5 @@
 import { auth } from "@/lib/auth";
-import ProfileButton from "./_components/profile-button";
+import ProfileButton from "./profile-button";
 import ModeToggle from "@/components/mode-toggle";
 
 export default async function Navbar() {

@@ -7,6 +7,8 @@ import { NextSSRPlugin } from "@uploadthing/react/next-ssr-plugin";
 import { extractRouterConfig } from "uploadthing/server";
 import { ourFileRouter } from "./api/uploadthing/core";
 import { Toaster } from "@/components/ui/toaster";
+import Navbar from "./_components/navbar";
+import { auth } from "@/lib/auth";
 
 const geistSans = Geist({
     variable: "--font-geist-sans",
@@ -23,11 +25,13 @@ export const metadata: Metadata = {
     description: "Built by emirhanpisgin",
 };
 
-export default function RootLayout({
+export default async function RootLayout({
     children,
 }: Readonly<{
     children: React.ReactNode;
 }>) {
+    const session = await auth();
+
     return (
         <html lang="en" suppressHydrationWarning>
             <body
@@ -38,6 +42,7 @@ export default function RootLayout({
                     routerConfig={extractRouterConfig(ourFileRouter)}
                 />
                 <Providers>
+                    <Navbar session={session} />
                     {children}
                     <MobileDoc />
                     <Toaster />

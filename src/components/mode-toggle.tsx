@@ -12,7 +12,7 @@ export default function ModeToggle() {
         setMounted(true);
     }, []);
 
-    if (!mounted) return <div className="relative size-8"/>;
+    if (!mounted) return <div className="relative size-8 lg:size-7"/>;
 
     return (
         <div className="relative size-8 lg:size-7 hover:cursor-pointer">

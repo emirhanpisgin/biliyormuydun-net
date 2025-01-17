@@ -27,7 +27,7 @@ export default function Navbar({ session }: NavbarProps) {
 
     return (
         <MaxWidthWrapper className="hidden p-2 lg:block">
-            <div className="flex border rounded-lg p-4 gap-6 justify-end">
+            <div className="flex border rounded-lg p-4 gap-6 justify-end shadow-lg">
                 <div className="flex flex-1 gap-2">
                     <Link href={"/"} className="font-semibold text-xl">
                         Biliyor Muydun?

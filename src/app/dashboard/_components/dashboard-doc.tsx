@@ -10,7 +10,7 @@ export default function DashboardDoc() {
     const [open, setOpen] = useState(false);
 
     return (
-        <div className="w-full py-2 block lg:hidden">
+        <div className="w-full block lg:hidden">
             <div className="border flex justify-end rounded-lg p-4 bg-background shadow-lg">
                 <div className="flex-1 flex gap-4 items-center">
                     <div className="font-semibold text-lg flex items-center">

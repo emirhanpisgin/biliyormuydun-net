@@ -9,6 +9,7 @@ import { ourFileRouter } from "./api/uploadthing/core";
 import { Toaster } from "@/components/ui/toaster";
 import Navbar from "./_components/navbar";
 import { auth } from "@/lib/auth";
+import MaxWidthWrapper from "@/components/max-width-wrapper";
 
 const geistSans = Geist({
     variable: "--font-geist-sans",
@@ -42,10 +43,12 @@ export default async function RootLayout({
                     routerConfig={extractRouterConfig(ourFileRouter)}
                 />
                 <Providers>
-                    <Navbar session={session} />
-                    {children}
-                    <MobileDoc />
-                    <Toaster />
+                    <MaxWidthWrapper>
+                        <Navbar session={session} />
+                        {children}
+                        <MobileDoc />
+                        <Toaster />
+                    </MaxWidthWrapper>
                 </Providers>
             </body>
         </html>

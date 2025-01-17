@@ -1,4 +1,3 @@
-import MaxWidthWrapper from "@/components/max-width-wrapper";
 import DashboardDoc from "./_components/dashboard-doc";
 
 interface LayoutProps {
@@ -7,9 +6,9 @@ interface LayoutProps {
 
 export default function Layout({ children }: LayoutProps) {
     return (
-        <MaxWidthWrapper className="relative">
+        <div className="relative h-full">
             <DashboardDoc />
             {children}
-        </MaxWidthWrapper>
+        </div>
     );
 }

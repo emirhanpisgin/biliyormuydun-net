@@ -7,7 +7,7 @@ interface MaxWidthWrapperProps extends React.HTMLAttributes<HTMLDivElement> {
 
 export default function MaxWidthWrapper({ children, className, ...props }: MaxWidthWrapperProps ) {
     return (
-        <div {...props} className={cn("w-full lg:w-[90%] xl:w-5/6 2xl:w-4/5 mx-auto px-2", className)}>
+        <div {...props} className={cn("w-full lg:w-[90%] xl:w-5/6 2xl:w-4/5 mx-auto p-2", className)}>
             {children}
         </div>
     );

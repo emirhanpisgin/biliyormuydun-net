@@ -3,7 +3,6 @@ import ProfileButton from "./profile-button";
 import ModeToggle from "@/components/mode-toggle";
 import { AppWindow, ChevronRight } from "lucide-react";
 import Link from "next/link";
-import MaxWidthWrapper from "@/components/max-width-wrapper";
 import { useEffect, useState } from "react";
 import { Session } from "next-auth";
 import { usePathname } from "next/navigation";
@@ -15,6 +14,8 @@ interface NavbarProps {
 const routeDisplayNames: { [x: `/${string}`]: string } = {
     "/dashboard": "Yönetim Paneli",
     "/blogs": "Bloglar",
+    "/categories": "Kategoriler",
+    "/topics": "Konular",
 }
 
 export default function Navbar({ session }: NavbarProps) {
@@ -26,7 +27,7 @@ export default function Navbar({ session }: NavbarProps) {
     },[pathname])
 
     return (
-        <MaxWidthWrapper className="hidden p-2 lg:block">
+        <div className="hidden lg:block">
             <div className="flex border rounded-lg p-4 gap-6 justify-end shadow-lg">
                 <div className="flex flex-1 gap-2">
                     <Link href={"/"} className="font-semibold text-xl">
@@ -47,6 +48,6 @@ export default function Navbar({ session }: NavbarProps) {
                 <ModeToggle />
                 <ProfileButton initialUser={session?.user} />
             </div>
-        </MaxWidthWrapper>
+        </div>
     );
 }

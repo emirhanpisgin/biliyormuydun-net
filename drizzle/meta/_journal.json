@@ -43,6 +43,13 @@
       "when": 1737159968950,
       "tag": "0005_gorgeous_sprite",
       "breakpoints": true
+    },
+    {
+      "idx": 6,
+      "version": "7",
+      "when": 1737237046431,
+      "tag": "0006_peaceful_firedrake",
+      "breakpoints": true
     }
   ]
 }

@@ -9,7 +9,7 @@ export default async function MobileDoc() {
 
     return (
         <div className="w-full fixed bottom-0 left-0 lg:hidden p-2">
-            <div className="w-full h-full py-4 border flex gap-[15%] shadow-lg rounded-lg justify-center items-center">
+            <div className="w-full h-full bg-background py-4 border flex gap-[15%] shadow-lg rounded-lg justify-center items-center">
                 <Link href="/">
                     <House className="size-8 text-foreground transition-all" />
                 </Link>

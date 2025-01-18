@@ -47,3 +47,10 @@ export function toUsername(displayName?: string, email?: string): string {
     }
     return generateRandomUsername();
 }
+
+export const routeDisplayNames: { [x: `/${string}`]: string } = {
+    "/dashboard": "Yönetim Paneli",
+    "/blogs": "Bloglar",
+    "/categories": "Kategoriler",
+    "/topics": "Konular",
+}

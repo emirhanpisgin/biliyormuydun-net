@@ -6,25 +6,19 @@ import Link from "next/link";
 import { useEffect, useState } from "react";
 import { Session } from "next-auth";
 import { usePathname } from "next/navigation";
+import { routeDisplayNames } from "@/lib/utils";
 
 interface NavbarProps {
     session: Session | null;
 }
 
-const routeDisplayNames: { [x: `/${string}`]: string } = {
-    "/dashboard": "Yönetim Paneli",
-    "/blogs": "Bloglar",
-    "/categories": "Kategoriler",
-    "/topics": "Konular",
-}
-
 export default function Navbar({ session }: NavbarProps) {
     const pathname = usePathname();
     const [routes, setRoutes] = useState<string[]>(pathname.split("/").filter(Boolean));
-    
+
     useEffect(() => {
         setRoutes(pathname.split("/").filter(Boolean));
-    },[pathname])
+    }, [pathname])
 
     return (
         <div className="hidden lg:block">
@@ -33,14 +27,19 @@ export default function Navbar({ session }: NavbarProps) {
                     <Link href={"/"} className="font-semibold text-xl">
                         Biliyor Muydun?
                     </Link>
-                    {!!routes?.length && routes?.map((route) => (
-                        <div key={route} className="flex items-center gap-2">
-                            <ChevronRight className="size-5" />
-                            <Link href={`/${route}`} className="text-lg hover:underline underline-offset-2">
-                                {routeDisplayNames[`/${route}`]}
-                            </Link>
-                        </div>
-                    ))}
+                    {!!routes?.length && routes?.map((route, index) => {
+                        const previousRoute = routes[index - 1];
+                        const href = previousRoute ? `/${previousRoute}/${route}` : `/${route}`;
+
+                        return (
+                            <div key={route} className="flex items-center gap-2" >
+                                <ChevronRight className="size-5" />
+                                <Link href={href} className="text-lg hover:underline underline-offset-2">
+                                    {routeDisplayNames[`/${route}`]}
+                                </Link>
+                            </div>
+                        )
+                    })}
                 </div>
                 <Link href={"/dashboard"}>
                     <AppWindow className="size-7" />
@@ -48,6 +47,6 @@ export default function Navbar({ session }: NavbarProps) {
                 <ModeToggle />
                 <ProfileButton initialUser={session?.user} />
             </div>
-        </div>
+        </div >
     );
 }

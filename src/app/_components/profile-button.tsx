@@ -84,6 +84,8 @@ function ProfileContent({ user, isSettingsOpen, setIsSettingsOpen, update, isDes
     });
     const { toast } = useToast();
 
+    // TODO - Beautify success returns
+
     return (
         <div className="relative -z-10 w-full flex flex-col items-center">
             <div className="absolute flex gap-1 top-0 right-0 p-2">
@@ -125,7 +127,7 @@ function ProfileContent({ user, isSettingsOpen, setIsSettingsOpen, update, isDes
             )}
             {!isSettingsOpen ?
                 (<>
-                    <ProfilePhoto url={user.image!} />
+                    <ProfilePhoto url={user.image!} className="size-24 lg:size-36"/>
                     <div className="flex flex-col items-center py-2">
                         <div className="font-semibold text-2xl">
                             {user.name}
@@ -136,7 +138,7 @@ function ProfileContent({ user, isSettingsOpen, setIsSettingsOpen, update, isDes
                     </div>
                 </>) : (<>
                     <div className="relative pt-3">
-                        <ProfilePhoto url={user.image!} />
+                        <ProfilePhoto url={user.image!} className="size-24 lg:size-36"/>
                         <UploadButton
                             endpoint={"profilePhotoUploader"}
                             content={{

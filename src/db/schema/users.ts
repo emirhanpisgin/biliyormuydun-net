@@ -3,6 +3,7 @@ import { pgEnum, pgTable, text, timestamp } from "drizzle-orm/pg-core";
 import { sessions } from "./sessions";
 import { authenticators } from "./authenticators";
 import { accounts } from "./accounts";
+import { categories } from "./categories";
 
 export const roleEnum = pgEnum("role", ["member", "admin"]);
 
@@ -25,6 +26,7 @@ export const usersRelations = relations(users, ({ many }) => ({
 	sessions: many(sessions),
 	authenticators: many(authenticators),
     accounts: many(accounts),
+    categories: many(categories),
 }));
 
 export type User = typeof users.$inferSelect;

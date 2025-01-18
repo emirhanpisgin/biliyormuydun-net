@@ -1,0 +1,41 @@
+import { Button } from "@/components/ui/button";
+import { Input } from "@/components/ui/input";
+import { Search } from "lucide-react";
+import AddCategorySheet from "./_components/add-category-sheet";
+import { database } from "@/db";
+import CategoryCard from "./_components/category-card";
+
+export default async function Categories() {
+    const categoriesWithUsers = await database.query.categories.findMany({
+        with: {
+            creator: true,
+        }
+    });
+
+    return (
+        <div className="w-full flex flex-col gap-2">
+            <div className="flex gap-2 pt-2">
+                <div className="text-xl font-semibold hidden lg:flex items-center">
+                    Kategoriler
+                </div>
+                <div className="flex justify-center flex-1">
+                    <div className="w-full lg:w-1/2 flex gap-2">
+                        <Input className="flex-1" placeholder="Kategori Adı..." />
+                        <Button size={"icon"}>
+                            <Search />
+                        </Button>
+                    </div>
+                </div>
+                <AddCategorySheet />
+            </div>
+            <div className="flex flex-col gap-2 pb-32">
+                {[...categoriesWithUsers, ...categoriesWithUsers, ...categoriesWithUsers].map((category, index) => (
+                    <CategoryCard key={index} category={category} />
+                ))}
+                {categoriesWithUsers.length === 0 && (
+                    <div className="text-center text-muted-foreground py-16">Henüz kategori eklenmemiş.</div>
+                )}
+            </div>
+        </div>
+    );
+}

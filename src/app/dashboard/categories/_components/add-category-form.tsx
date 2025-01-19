@@ -33,10 +33,8 @@ export default function AddCategorySheet() {
     if (isDesktop) {
         return (
             <Dialog open={open} onOpenChange={(open) => setOpen(open)}>
-                <DialogTrigger>
-                    <Button className={buttonVariants()}>
-                        <Plus /> Kategori Oluştur
-                    </Button>
+                <DialogTrigger className={buttonVariants()}>
+                    <Plus /> Kategori Oluştur
                 </DialogTrigger>
                 <DialogContent>
                     <DialogHeader>

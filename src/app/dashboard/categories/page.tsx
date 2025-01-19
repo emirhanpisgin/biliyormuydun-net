@@ -6,9 +6,9 @@ import { database } from "@/db";
 import CategoryCard from "./_components/category-card";
 
 export default async function Categories() {
-    const categoriesWithUsers = await database.query.categories.findMany({
+    const categoriesWithAuthors = await database.query.categories.findMany({
         with: {
-            creator: true,
+            author: true,
         }
     });
 
@@ -33,10 +33,10 @@ export default async function Categories() {
                 <AddCategoryForm />
             </div>
             <div className="flex flex-col gap-2 pb-32">
-                {categoriesWithUsers.map((category, index) => (
-                    <CategoryCard key={index} category={category} />
+                {categoriesWithAuthors.map((category, index) => (
+                    <CategoryCard key={category.id} category={category} />
                 ))}
-                {categoriesWithUsers.length === 0 && (
+                {categoriesWithAuthors.length === 0 && (
                     <div className="text-center text-muted-foreground py-16">Henüz kategori eklenmemiş.</div>
                 )}
             </div>

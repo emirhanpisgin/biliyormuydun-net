@@ -57,7 +57,7 @@ export default function ProfileButton({ initialUser }: ProfileButtonProps) {
     }
 
     return (
-        <LogIn onClick={() => signIn()} className="size-8 text-foreground transition-all duration-75" />
+        <LogIn onClick={() => signIn()} className="size-8 lg:size-7 cursor-pointer text-foreground transition-all duration-75" />
     );
 }
 

@@ -3,7 +3,7 @@ import ProfilePhoto from "@/components/profile-photo";
 import { Button, buttonVariants } from "@/components/ui/button";
 import { Dialog, DialogContent, DialogDescription, DialogHeader, DialogTitle, DialogTrigger } from "@/components/ui/dialog";
 import { DropdownMenu, DropdownMenuContent, DropdownMenuItem, DropdownMenuLabel, DropdownMenuSeparator, DropdownMenuTrigger } from "@/components/ui/dropdown-menu";
-import { CategoryWithCreator } from "@/db/schema/categories";
+import { CategoryWithAuthor } from "@/db/schema/categories";
 import { useToast } from "@/hooks/use-toast";
 import { Ellipsis, LoaderCircle, Trash } from "lucide-react";
 import { useState } from "react";
@@ -12,10 +12,10 @@ import { deleteCategoryAction } from "../actions";
 import { cn } from "@/lib/utils";
 
 interface CategoryCardProps {
-    category: CategoryWithCreator;
+    category: CategoryWithAuthor;
 }
 
-export default function CategoryCard({ category: { createdAt, creator, creatorId, name } }: CategoryCardProps) {
+export default function CategoryCard({ category: { createdAt, author, name } }: CategoryCardProps) {
     const [verificationOpen, setVerificationOpen] = useState(false);
     const { toast } = useToast();
     const { execute, isPending } = useServerAction(deleteCategoryAction, {
@@ -74,9 +74,9 @@ export default function CategoryCard({ category: { createdAt, creator, creatorId
                 </Dialog>
             </div>
             <div className="flex items-center gap-2">
-                <ProfilePhoto url={creator.image!} className="size-8" />
+                <ProfilePhoto url={author.image!} className="size-8" />
                 <div>
-                    {creator.name}
+                    {author.name}
                 </div>
             </div>
         </div>

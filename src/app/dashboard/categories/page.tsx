@@ -33,7 +33,7 @@ export default async function Categories() {
                 <AddCategoryForm />
             </div>
             <div className="flex flex-col gap-2 pb-32">
-                {[...categoriesWithUsers, ...categoriesWithUsers, ...categoriesWithUsers].map((category, index) => (
+                {categoriesWithUsers.map((category, index) => (
                     <CategoryCard key={index} category={category} />
                 ))}
                 {categoriesWithUsers.length === 0 && (

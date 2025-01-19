@@ -1,6 +1,5 @@
 "use client";
 import { Sheet, SheetClose, SheetContent, SheetDescription, SheetHeader, SheetTitle, SheetTrigger } from "@/components/ui/sheet";
-import { useMediaQuery } from "@/hooks/use-media-query";
 import { routeDisplayNames } from "@/lib/utils";
 import { ChevronRight, Menu, X } from "lucide-react";
 import Link from "next/link";

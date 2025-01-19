@@ -12,6 +12,9 @@ export default async function Categories() {
         }
     });
 
+    // TODO - Sort categories alphabetically
+    // TODO - Check if it past 1 week after the category is created and show a new tag
+
     return (
         <div className="w-full flex flex-col gap-2">
             <div className="flex gap-2 pt-2">
@@ -25,6 +28,7 @@ export default async function Categories() {
                             <Search />
                         </Button>
                     </div>
+                    {/* TODO - Make this functional */}
                 </div>
                 <AddCategorySheet />
             </div>

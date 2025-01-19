@@ -39,7 +39,7 @@ export default function AddCategorySheet() {
                 <DialogContent>
                     <DialogHeader>
                         <DialogTitle>Yeni Kategori Oluştur</DialogTitle>
-                        <DialogDescription className="sr-only">yeni kategori oluşturma ekranı</DialogDescription>
+                        <DialogDescription className="sr-only">kategori oluşturma ekranı</DialogDescription>
                     </DialogHeader>
                     <div className="flex gap-2 justify-end items-end py-4">
                         <Label className="text-lg w-full flex-1">

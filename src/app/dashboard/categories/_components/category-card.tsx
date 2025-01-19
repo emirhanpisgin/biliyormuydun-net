@@ -19,7 +19,7 @@ export default function CategoryCard({ category: { createdAt, creator, creatorId
     const [verificationOpen, setVerificationOpen] = useState(false);
     const { toast } = useToast();
     const { execute, isPending } = useServerAction(deleteCategoryAction, {
-        onSuccess({data}) {
+        onSuccess({ data }) {
             setVerificationOpen(false);
             toast({
                 title: data.success ? "Başarılı" : "Başarısız",
@@ -27,7 +27,7 @@ export default function CategoryCard({ category: { createdAt, creator, creatorId
             })
         }
     })
-    
+
 
     return (
         <div className="border p-3 rounded-lg flex flex-col gap-2">
@@ -52,9 +52,9 @@ export default function CategoryCard({ category: { createdAt, creator, creatorId
                         <DialogHeader>
                             <DialogTitle>Emin misin?</DialogTitle>
                             <DialogDescription>
-                                <div className="font-semibold inline">
+                                <span className="font-semibold">
                                     {name}
-                                </div> kategorisini silmek istediğinize emin misiniz?
+                                </span> kategorisini silmek istediğinize emin misiniz?
                             </DialogDescription>
                         </DialogHeader>
                         <div className="flex gap-2 justify-end">
@@ -66,7 +66,7 @@ export default function CategoryCard({ category: { createdAt, creator, creatorId
                                     Sil
                                 </div>
                                 <div className={cn("absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2", isPending ? "block" : "hidden")}>
-                                    <LoaderCircle className="animate-spin"/>
+                                    <LoaderCircle className="animate-spin" />
                                 </div>
                             </Button>
                         </div>

@@ -5,50 +5,8 @@
     {
       "idx": 0,
       "version": "7",
-      "when": 1736190368908,
-      "tag": "0000_brief_silk_fever",
-      "breakpoints": true
-    },
-    {
-      "idx": 1,
-      "version": "7",
-      "when": 1736190382107,
-      "tag": "0001_mysterious_killmonger",
-      "breakpoints": true
-    },
-    {
-      "idx": 2,
-      "version": "7",
-      "when": 1736344173551,
-      "tag": "0002_narrow_hex",
-      "breakpoints": true
-    },
-    {
-      "idx": 3,
-      "version": "7",
-      "when": 1736722164987,
-      "tag": "0003_green_weapon_omega",
-      "breakpoints": true
-    },
-    {
-      "idx": 4,
-      "version": "7",
-      "when": 1736811465046,
-      "tag": "0004_amazing_kinsey_walden",
-      "breakpoints": true
-    },
-    {
-      "idx": 5,
-      "version": "7",
-      "when": 1737159968950,
-      "tag": "0005_gorgeous_sprite",
-      "breakpoints": true
-    },
-    {
-      "idx": 6,
-      "version": "7",
-      "when": 1737237046431,
-      "tag": "0006_peaceful_firedrake",
+      "when": 1737328676367,
+      "tag": "0000_short_steve_rogers",
       "breakpoints": true
     }
   ]

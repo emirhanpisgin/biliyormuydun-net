@@ -64,7 +64,7 @@ export default function ProfileButton({ initialUser }: ProfileButtonProps) {
 function ProfileContent({ user, isSettingsOpen, setIsSettingsOpen, update, isDesktop }: { user: User, isSettingsOpen: boolean, setIsSettingsOpen: Dispatch<SetStateAction<boolean>>, update: () => void, isDesktop: boolean }) {
     const [name, setName] = useState(user.name!);
     const [username, setUsername] = useState(user.username!);
-    const { execute: executeChangeName, isPending: isChangeNamePending, isSuccess: isChangeNameSuccess } = useServerAction(changeNameAction, {
+    const { execute: executeChangeName, isPending: isChangeNamePending } = useServerAction(changeNameAction, {
         onSuccess({ data }) {
             update();
             toast({
@@ -73,7 +73,7 @@ function ProfileContent({ user, isSettingsOpen, setIsSettingsOpen, update, isDes
             });
         }
     });
-    const { execute: executeChangeUsername, isPending: isChangeUsernamePending, isSuccess: isChangeUsernameSuccess } = useServerAction(changeUsernameAction, {
+    const { execute: executeChangeUsername, isPending: isChangeUsernamePending } = useServerAction(changeUsernameAction, {
         onSuccess({ data }) {
             update();
             toast({

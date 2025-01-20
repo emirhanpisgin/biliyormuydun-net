@@ -1,7 +1,7 @@
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Search } from "lucide-react";
-import AddCategoryForm from "./_components/add-category-form";
+import AddCategory from "./_components/add-category";
 import { database } from "@/db";
 import CategoryCard from "./_components/category-card";
 
@@ -30,7 +30,7 @@ export default async function Categories() {
                     </div>
                     {/* TODO - Make this functional */}
                 </div>
-                <AddCategoryForm />
+                <AddCategory />
             </div>
             <div className="flex flex-col gap-2 pb-32">
                 {categoriesWithAuthors.map((category, index) => (

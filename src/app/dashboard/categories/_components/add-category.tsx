@@ -11,20 +11,9 @@ import { useToast } from "@/hooks/use-toast";
 import { useMediaQuery } from "@/hooks/use-media-query";
 import { Dialog, DialogContent, DialogDescription, DialogHeader, DialogTitle, DialogTrigger } from "@/components/ui/dialog";
 
-export default function AddCategorySheet() {
-    const [categoryName, setCategoryName] = useState("");
+export default function AddCategory() {
     const [open, setOpen] = useState(false);
-    const { toast } = useToast();
-    const { isPending, execute } = useServerAction(addCategoryAction, {
-        onSuccess: ({ data }) => {
-            setOpen(false);
-            setCategoryName("");
-            toast({
-                title: data.success ? "Başarılı" : "Başarısız",
-                description: data.message,
-            })
-        }
-    });
+
 
     // TODO - Beautify success returns
 
@@ -34,22 +23,14 @@ export default function AddCategorySheet() {
         return (
             <Dialog open={open} onOpenChange={(open) => setOpen(open)}>
                 <DialogTrigger className={buttonVariants()}>
-                    <Plus /> Kategori Oluştur
+                    <Plus className="size-5" /> Kategori Oluştur
                 </DialogTrigger>
                 <DialogContent>
                     <DialogHeader>
                         <DialogTitle>Yeni Kategori Oluştur</DialogTitle>
                         <DialogDescription className="sr-only">kategori oluşturma ekranı</DialogDescription>
                     </DialogHeader>
-                    <div className="flex gap-2 justify-end items-end py-4">
-                        <Label className="text-lg w-full flex-1">
-                            Kategori Adı
-                            <Input disabled={isPending} className="mt-1 lg:text-base" placeholder="Kategori Adı" value={categoryName} onChange={(e) => setCategoryName(e.target.value)} />
-                        </Label>
-                        <Button onClick={() => execute(categoryName)} disabled={isPending}>
-                            {isPending ? <LoaderCircle className="animate-spin" /> : <Check />} Ekle
-                        </Button>
-                    </div>
+                    <AddCategoryForm setOpen={setOpen} />
                 </DialogContent>
             </Dialog>
         );
@@ -65,16 +46,39 @@ export default function AddCategorySheet() {
                     <SheetTitle>Yeni Kategori Oluştur</SheetTitle>
                     <SheetDescription className="sr-only">kategori oluşturma ekranı</SheetDescription>
                 </SheetHeader>
-                <div className="flex gap-2 justify-end items-end py-4">
-                    <Label className="text-lg w-full flex-1">
-                        Kategori Adı
-                        <Input disabled={isPending} className="mt-1 lg:text-base" placeholder="Kategori Adı" value={categoryName} onChange={(e) => setCategoryName(e.target.value)} />
-                    </Label>
-                    <Button onClick={() => execute(categoryName)} disabled={isPending}>
-                        <Check /> Ekle
-                    </Button>
-                </div>
+                <AddCategoryForm setOpen={setOpen} />
             </SheetContent>
         </Sheet>
+    );
+}
+
+interface AddCategoryFormProps {
+    setOpen: (open: boolean) => void;
+}
+
+function AddCategoryForm({ setOpen }: AddCategoryFormProps) {
+    const [categoryName, setCategoryName] = useState("");
+    const { toast } = useToast();
+    const { isPending, execute } = useServerAction(addCategoryAction, {
+        onSuccess: ({ data }) => {
+            setOpen(false);
+            setCategoryName("");
+            toast({
+                title: data.success ? "Başarılı" : "Başarısız",
+                description: data.message,
+            })
+        }
+    });
+
+    return (
+        <div className="flex gap-2 justify-end items-end py-4">
+            <Label className="text-lg w-full flex-1">
+                Kategori Adı
+                <Input disabled={isPending} className="mt-1 lg:text-base" placeholder="Kategori Adı" value={categoryName} onChange={(e) => setCategoryName(e.target.value)} />
+            </Label>
+            <Button onClick={() => execute(categoryName)} disabled={isPending}>
+                <Check /> Ekle
+            </Button>
+        </div>
     );
 }

@@ -15,7 +15,7 @@ interface CategoryCardProps {
     category: CategoryWithAuthor;
 }
 
-export default function CategoryCard({ category: { createdAt, author, name } }: CategoryCardProps) {
+export default function CategoryCard({ category: { createdAt, author, name, id } }: CategoryCardProps) {
     const [verificationOpen, setVerificationOpen] = useState(false);
     const { toast } = useToast();
     const { execute, isPending } = useServerAction(deleteCategoryAction, {
@@ -61,7 +61,7 @@ export default function CategoryCard({ category: { createdAt, author, name } }: 
                             <Button variant={"outline"}>
                                 İptal
                             </Button>
-                            <Button className="relative" disabled={isPending} variant={"destructive"} onClick={() => execute(name)}>
+                            <Button className="relative" disabled={isPending} variant={"destructive"} onClick={() => execute(id)}>
                                 <div className={isPending ? "opacity-0" : "opacity-100"}>
                                     Sil
                                 </div>

@@ -37,9 +37,9 @@ export const addCategoryAction = authenticatedAction
 export const deleteCategoryAction = authenticatedAction
     .createServerAction()
     .input(z.string())
-    .handler(async ({ input: categoryName }) => {
+    .handler(async ({ input: categoryId }) => {
         try {
-            const [deletedCategory] = await database.delete(categories).where(eq(categories.name, categoryName)).returning();
+            const [deletedCategory] = await database.delete(categories).where(eq(categories.id, categoryId)).returning();
 
             if (!deletedCategory) return { success: false, message: "Kategori bulunamadı." };
 

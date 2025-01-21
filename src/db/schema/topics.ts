@@ -12,7 +12,7 @@ export const topics = pgTable("topic", {
 	content: text("content"),
 	categoryId: text("categoryId")
 		.notNull()
-		.references(() => categories.id, { onDelete: "no action" }),
+		.references(() => categories.id, { onDelete: "set null" }),
 	createdAt: timestamp("createdAt", { mode: "date" }).notNull().defaultNow(),
 	authorId: text("authorId")
 		.notNull()

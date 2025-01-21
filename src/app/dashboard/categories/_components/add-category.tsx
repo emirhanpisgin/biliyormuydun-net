@@ -71,14 +71,14 @@ function AddCategoryForm({ setOpen }: AddCategoryFormProps) {
     });
 
     return (
-        <div className="flex gap-2 justify-end items-end py-4">
+        <form className="flex gap-2 justify-end items-end py-4">
             <Label className="text-lg w-full flex-1">
                 Kategori Adı
                 <Input disabled={isPending} className="mt-1 lg:text-base" placeholder="Kategori Adı" value={categoryName} onChange={(e) => setCategoryName(e.target.value)} />
             </Label>
-            <Button onClick={() => execute(categoryName)} disabled={isPending}>
+            <Button type="submit" onClick={() => execute(categoryName)} disabled={isPending}>
                 <Check /> Ekle
             </Button>
-        </div>
+        </form>
     );
 }

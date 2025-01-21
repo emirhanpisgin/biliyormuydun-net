@@ -14,6 +14,8 @@ export const changeNameAction = authenticatedAction
 			if (ctx.nameChangedAt && new Date(ctx.nameChangedAt).getTime() > oneHourAgo)
 				return { success: false, message: "İsminizi saatte bir değiştirebilirsiniz." };
 
+            // TODO - Trim name input
+
 			if (!input.match(/^[a-zA-Z0-9_ğüşöçıİĞÜŞÖÇ ]{4,32}$/))
 				return { success: false, message: "Lütfen geçerli bir isim giriniz." };
 
@@ -36,6 +38,8 @@ export const changeUsernameAction = authenticatedAction
 			const sixHoursAgo = Date.now() - 6 * 60 * 60 * 1000;
 			if (ctx.usernameChangedAt && new Date(ctx.usernameChangedAt).getTime() > sixHoursAgo)
 				return { success: false, message: "Kullanıcı adınızı 6 saatte bir değiştirebilirsiniz." };
+
+            // TODO - Trim name input
 
 			if (!input.match(/^[a-zA-Z0-9_]{3,16}$/))
 				return { success: false, message: "Lütfen geçerli bir kullanıcı adı giriniz." };

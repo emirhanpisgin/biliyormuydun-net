@@ -4,6 +4,7 @@ import { sessions } from "./sessions";
 import { authenticators } from "./authenticators";
 import { accounts } from "./accounts";
 import { categories } from "./categories";
+import { topics } from "./topics";
 
 export const roleEnum = pgEnum("role", ["member", "admin"]);
 
@@ -22,11 +23,13 @@ export const users = pgTable("user", {
     role: roleEnum("role").$default(() => "member"),
 });
 
-export const usersRelations = relations(users, ({ many }) => ({
+export const usersRelations = relations(users, ({ many, one }) => ({
 	sessions: many(sessions),
 	authenticators: many(authenticators),
     accounts: many(accounts),
     categories: many(categories),
+    topics: many(topics),
+    assignedTopic: one(topics)
 }));
 
 export type User = typeof users.$inferSelect;

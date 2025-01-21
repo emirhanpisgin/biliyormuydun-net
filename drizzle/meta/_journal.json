@@ -15,6 +15,13 @@
       "when": 1737485261335,
       "tag": "0001_right_tyrannus",
       "breakpoints": true
+    },
+    {
+      "idx": 2,
+      "version": "7",
+      "when": 1737488998992,
+      "tag": "0002_dapper_mach_iv",
+      "breakpoints": true
     }
   ]
 }

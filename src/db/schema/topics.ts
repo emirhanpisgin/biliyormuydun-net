@@ -10,13 +10,10 @@ export const topics = pgTable("topic", {
 	slug: text("slug").unique().notNull(),
 	title: text("title").notNull(),
 	content: text("content"),
-	categoryId: text("categoryId")
-		.notNull()
-		.references(() => categories.id, { onDelete: "set null" }),
+	categoryId: text("categoryId").references(() => categories.id, { onDelete: "set null" }),
 	createdAt: timestamp("createdAt", { mode: "date" }).notNull().defaultNow(),
-	authorId: text("authorId")
-		.notNull()
-		.references(() => users.id, { onDelete: "no action" }),
+	authorId: text("authorId").references(() => users.id, { onDelete: "set null" }),
+	writerId: text("writerId").references(() => users.id, { onDelete: "set null" }),
 	sources: text("sources").array().notNull().default([]),
 });
 
@@ -29,18 +26,17 @@ export const topicRelations = relations(topics, ({ one }) => ({
 		fields: [topics.authorId],
 		references: [users.id],
 	}),
+	writer: one(users, {
+		fields: [topics.writerId],
+		references: [users.id],
+	}),
 }));
 
 export type Topic = typeof topics.$inferSelect;
 export type NewTopic = typeof topics.$inferInsert;
 export type UpdateTopic = Omit<NewTopic, "id">;
-export type TopicWithAuthor = Topic & {
-	author: User;
-};
-export type TopicWithCategory = Topic & {
+export type TopicWithRelations = Topic & {
 	category: Category;
-};
-export type TopicWithAuthorAndCategory = Topic & {
 	author: User;
-	category: Category;
+	writer: User;
 };

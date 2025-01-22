@@ -20,16 +20,22 @@ export const users = pgTable("user", {
 	emailVerified: timestamp("emailVerified", { mode: "date" }),
 	image: text("image"),
 	imageChangedAt: timestamp("imageChangedAt", { mode: "date" }),
-    role: roleEnum("role").$default(() => "member"),
+	role: roleEnum("role").$default(() => "member"),
 });
 
 export const usersRelations = relations(users, ({ many, one }) => ({
 	sessions: many(sessions),
 	authenticators: many(authenticators),
-    accounts: many(accounts),
-    categories: many(categories),
-    topics: many(topics),
-    assignedTopic: one(topics)
+	accounts: many(accounts),
+	categories: many(categories),
+	topics: many(topics, {
+		relationName: "author",
+	}),
+	assignedTopic: one(topics, {
+        fields: [users.id],
+        references: [topics.editorId],
+		relationName: "editor",
+	}),
 }));
 
 export type User = typeof users.$inferSelect;

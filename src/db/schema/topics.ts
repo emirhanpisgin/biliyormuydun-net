@@ -13,7 +13,7 @@ export const topics = pgTable("topic", {
 	categoryId: text("categoryId").references(() => categories.id, { onDelete: "set null" }),
 	createdAt: timestamp("createdAt", { mode: "date" }).notNull().defaultNow(),
 	authorId: text("authorId").references(() => users.id, { onDelete: "set null" }),
-	writerId: text("writerId").references(() => users.id, { onDelete: "set null" }),
+	editorId: text("editorId").references(() => users.id, { onDelete: "set null" }),
 	sources: text("sources").array().notNull().default([]),
 });
 
@@ -25,10 +25,12 @@ export const topicRelations = relations(topics, ({ one }) => ({
 	author: one(users, {
 		fields: [topics.authorId],
 		references: [users.id],
+        relationName: "author",
 	}),
-	writer: one(users, {
-		fields: [topics.writerId],
+	editor: one(users, {
+		fields: [topics.editorId],
 		references: [users.id],
+        relationName: "editor",
 	}),
 }));
 
@@ -38,5 +40,5 @@ export type UpdateTopic = Omit<NewTopic, "id">;
 export type TopicWithRelations = Topic & {
 	category: Category;
 	author: User;
-	writer: User;
+	editor: User;
 };

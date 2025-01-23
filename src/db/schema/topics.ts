@@ -38,7 +38,7 @@ export type Topic = typeof topics.$inferSelect;
 export type NewTopic = typeof topics.$inferInsert;
 export type UpdateTopic = Omit<NewTopic, "id">;
 export type TopicWithRelations = Topic & {
-	category: Category;
-	author: User;
-	editor: User;
+	category: Category | null;
+	author: User | null;
+	editor: User | null;
 };

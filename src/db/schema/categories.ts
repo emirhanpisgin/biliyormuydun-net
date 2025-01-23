@@ -26,15 +26,9 @@ export const categoryRelations = relations(categories, ({ one, many }) => ({
 export type Category = typeof categories.$inferSelect;
 export type NewCategory = typeof categories.$inferInsert;
 export type UpdateCategory = Omit<NewCategory, "id">;
-export type CategoryWithAuthor = Category & {
-	author: User;
-};
-export type CategoryWithTopics = Category & {
-    topics: Topic[];
-};
-export type CategoryWithAuthorAndTopics = Category & {
-    author: User;
-    topics: Topic[];
+export type CategoryWithRelations = Category & {
+	author: User | null;
+	topics: Topic[];
 };
 
 // TODO - Add post count to category schema

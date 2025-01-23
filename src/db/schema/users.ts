@@ -3,8 +3,8 @@ import { pgEnum, pgTable, text, timestamp } from "drizzle-orm/pg-core";
 import { sessions } from "./sessions";
 import { authenticators } from "./authenticators";
 import { accounts } from "./accounts";
-import { categories } from "./categories";
-import { topics } from "./topics";
+import { categories, Category } from "./categories";
+import { Topic, topics } from "./topics";
 
 export const roleEnum = pgEnum("role", ["member", "admin"]);
 
@@ -32,11 +32,17 @@ export const usersRelations = relations(users, ({ many, one }) => ({
 		relationName: "author",
 	}),
 	assignedTopic: one(topics, {
-        fields: [users.id],
-        references: [topics.editorId],
+		fields: [users.id],
+		references: [topics.editorId],
 		relationName: "editor",
 	}),
 }));
 
 export type User = typeof users.$inferSelect;
 export type UpdateUser = Omit<typeof users.$inferInsert, "id">;
+export type NewUser = Omit<UpdateUser, "role">;
+export type UserWithRelations = User & {
+	categories: Category[];
+	topics: Topic[];
+	assignedTopic: Topic | null;
+};

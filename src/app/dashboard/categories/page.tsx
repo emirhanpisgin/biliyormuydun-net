@@ -2,15 +2,11 @@ import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Search } from "lucide-react";
 import AddCategory from "./_components/add-category";
-import { database } from "@/db";
 import CategoryCard from "./_components/category-card";
+import { getCategoriesWithRelations } from "./queries";
 
 export default async function Categories() {
-    const categoriesWithAuthors = await database.query.categories.findMany({
-        with: {
-            author: true,
-        }
-    });
+    const categoriesWithAuthors = await getCategoriesWithRelations();
 
     // TODO - Sort categories alphabetically
     // TODO - Check if it past 1 week after the category is created and show a new tag

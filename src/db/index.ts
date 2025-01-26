@@ -16,4 +16,6 @@ if (process.env.NODE_ENV === "production") {
 	database = (global as any).database;
 }
 
+export type Database = typeof database;
+
 export { database, pg };

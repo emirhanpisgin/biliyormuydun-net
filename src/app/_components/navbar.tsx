@@ -41,9 +41,9 @@ export default function Navbar({ session }: NavbarProps) {
                         )
                     })}
                 </div>
-                <Link href={"/dashboard"}>
+                {session?.user?.role === "admin" && <Link href={"/dashboard"}>
                     <AppWindow className="size-7" />
-                </Link>
+                </Link>}
                 <ModeToggle />
                 <ProfileButton initialUser={session?.user} />
             </div>

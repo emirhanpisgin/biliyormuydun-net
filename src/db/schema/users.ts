@@ -27,7 +27,6 @@ export const usersRelations = relations(users, ({ many, one }) => ({
 	sessions: many(sessions),
 	authenticators: many(authenticators),
 	accounts: many(accounts),
-	categories: many(categories),
 	topics: many(topics, {
 		relationName: "author",
 	}),
@@ -42,7 +41,6 @@ export type User = typeof users.$inferSelect;
 export type UpdateUser = Omit<typeof users.$inferInsert, "id">;
 export type NewUser = Omit<UpdateUser, "role">;
 export type UserWithRelations = User & {
-	categories: Category[];
 	topics: Topic[];
 	assignedTopic: Topic | null;
 };

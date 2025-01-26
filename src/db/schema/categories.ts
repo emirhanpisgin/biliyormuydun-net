@@ -1,5 +1,4 @@
-import { pgTable, text, timestamp } from "drizzle-orm/pg-core";
-import { User, users } from "./users";
+import { pgTable, text } from "drizzle-orm/pg-core";
 import { relations } from "drizzle-orm";
 import { Topic, topics } from "./topics";
 
@@ -9,17 +8,9 @@ export const categories = pgTable("category", {
 		.notNull()
 		.$defaultFn(() => crypto.randomUUID()),
 	name: text("name").notNull(),
-	authorId: text("userId")
-		.notNull()
-		.references(() => users.id, { onDelete: "no action" }),
-	createdAt: timestamp("createdAt", { mode: "date" }).notNull().defaultNow(),
 });
 
-export const categoryRelations = relations(categories, ({ one, many }) => ({
-	author: one(users, {
-		fields: [categories.authorId],
-		references: [users.id],
-	}),
+export const categoryRelations = relations(categories, ({ many }) => ({
 	topics: many(topics),
 }));
 
@@ -27,7 +18,6 @@ export type Category = typeof categories.$inferSelect;
 export type NewCategory = typeof categories.$inferInsert;
 export type UpdateCategory = Omit<NewCategory, "id">;
 export type CategoryWithRelations = Category & {
-	author: User | null;
 	topics: Topic[];
 };
 

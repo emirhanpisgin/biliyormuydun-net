@@ -1,9 +1,8 @@
 "use client";
-import ProfilePhoto from "@/components/profile-photo";
-import { Button, buttonVariants } from "@/components/ui/button";
-import { Dialog, DialogContent, DialogDescription, DialogHeader, DialogTitle, DialogTrigger } from "@/components/ui/dialog";
-import { DropdownMenu, DropdownMenuContent, DropdownMenuItem, DropdownMenuLabel, DropdownMenuSeparator, DropdownMenuTrigger } from "@/components/ui/dropdown-menu";
-import { CategoryWithAuthor } from "@/db/schema/categories";
+import { Button } from "@/components/ui/button";
+import { Dialog, DialogContent, DialogDescription, DialogHeader, DialogTitle } from "@/components/ui/dialog";
+import { DropdownMenu, DropdownMenuContent, DropdownMenuItem, DropdownMenuSeparator, DropdownMenuTrigger } from "@/components/ui/dropdown-menu";
+import { Category } from "@/db/schema/categories";
 import { useToast } from "@/hooks/use-toast";
 import { Ellipsis, LoaderCircle, Trash } from "lucide-react";
 import { useState } from "react";
@@ -12,10 +11,10 @@ import { deleteCategoryAction } from "../actions";
 import { cn } from "@/lib/utils";
 
 interface CategoryCardProps {
-    category: CategoryWithAuthor;
+    category: Category;
 }
 
-export default function CategoryCard({ category: { createdAt, author, name, id } }: CategoryCardProps) {
+export default function CategoryCard({ category: { name, id } }: CategoryCardProps) {
     const [verificationOpen, setVerificationOpen] = useState(false);
     const { toast } = useToast();
     const { execute, isPending } = useServerAction(deleteCategoryAction, {
@@ -40,11 +39,10 @@ export default function CategoryCard({ category: { createdAt, author, name, id }
                         <Ellipsis />
                     </DropdownMenuTrigger>
                     <DropdownMenuContent>
-                        <DropdownMenuItem className="pointer-events-none">{createdAt.toLocaleString("tr")}</DropdownMenuItem>
-                        <DropdownMenuSeparator />
                         <DropdownMenuItem className="text-red-600" onClick={() => setVerificationOpen((state) => !state)}>
                             <Trash /> Sil
                         </DropdownMenuItem>
+                        {/* TODO: add category editing */}
                     </DropdownMenuContent>
                 </DropdownMenu>
                 <Dialog open={verificationOpen} onOpenChange={setVerificationOpen}>
@@ -72,12 +70,6 @@ export default function CategoryCard({ category: { createdAt, author, name, id }
                         </div>
                     </DialogContent>
                 </Dialog>
-            </div>
-            <div className="flex items-center gap-2">
-                <ProfilePhoto url={author.image!} className="size-8" />
-                <div>
-                    {author.name}
-                </div>
             </div>
         </div>
     );

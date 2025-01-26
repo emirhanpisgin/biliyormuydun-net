@@ -3,13 +3,12 @@ import { Input } from "@/components/ui/input";
 import { Search } from "lucide-react";
 import AddCategory from "./_components/add-category";
 import CategoryCard from "./_components/category-card";
-import { getCategoriesWithRelations } from "./queries";
+import { getCategories } from "./queries";
 
 export default async function Categories() {
-    const categoriesWithAuthors = await getCategoriesWithRelations();
+    const categories = await getCategories();
 
     // TODO - Sort categories alphabetically
-    // TODO - Check if it past 1 week after the category is created and show a new tag
 
     return (
         <div className="w-full flex flex-col gap-2">
@@ -29,10 +28,10 @@ export default async function Categories() {
                 <AddCategory />
             </div>
             <div className="flex flex-col gap-2 pb-32">
-                {categoriesWithAuthors.map((category, index) => (
+                {categories.map((category) => (
                     <CategoryCard key={category.id} category={category} />
                 ))}
-                {categoriesWithAuthors.length === 0 && (
+                {categories.length === 0 && (
                     <div className="text-center text-muted-foreground py-16">Henüz kategori eklenmemiş.</div>
                 )}
             </div>

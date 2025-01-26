@@ -3,10 +3,9 @@ import { pgEnum, pgTable, text, timestamp } from "drizzle-orm/pg-core";
 import { sessions } from "./sessions";
 import { authenticators } from "./authenticators";
 import { accounts } from "./accounts";
-import { categories, Category } from "./categories";
 import { Topic, topics } from "./topics";
 
-export const roleEnum = pgEnum("role", ["member", "admin"]);
+export const roleEnum = pgEnum("role", ["admin","moderator","author","researcher","member"]);
 
 export const users = pgTable("user", {
 	id: text("id")

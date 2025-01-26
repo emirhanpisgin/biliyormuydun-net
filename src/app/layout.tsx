@@ -26,6 +26,8 @@ export const metadata: Metadata = {
     description: "Built by emirhanpisgin",
 };
 
+// TODO: add custom not found screen
+
 export default async function RootLayout({
     children,
 }: Readonly<{

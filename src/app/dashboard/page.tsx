@@ -10,6 +10,8 @@ export default async function Dashboard() {
         return notFound();
     }
 
+    // TODO: add proper admin check
+
     return (
         <div className="flex gap-4 justify-center items-center">
             <Link className={buttonVariants()} href={"/dashboard/blogs"}>Bloglar</Link>

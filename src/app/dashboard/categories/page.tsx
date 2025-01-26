@@ -7,8 +7,8 @@ import { getCategories } from "./queries";
 
 export default async function Categories() {
     const categories = await getCategories();
-
-    // TODO - Sort categories alphabetically
+    // TODO: Add admin check
+    // TODO: Sort categories alphabetically
 
     return (
         <div className="w-full flex flex-col gap-2">
@@ -27,7 +27,7 @@ export default async function Categories() {
                 </div>
                 <AddCategory />
             </div>
-            <div className="flex flex-col gap-2 pb-32">
+            <div className="grid grid-cols-1 lg:grid-cols-3 gap-2 pb-32">
                 {categories.map((category) => (
                     <CategoryCard key={category.id} category={category} />
                 ))}

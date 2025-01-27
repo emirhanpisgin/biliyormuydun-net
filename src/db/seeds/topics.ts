@@ -17,7 +17,7 @@ const mock = async () => {
 		data.push({
 			title: topicTitle,
             slug: slugify(topicTitle),
-			content: faker.lorem.words({ min: 0, max: 15 }),
+			content: faker.lorem.words({ min: -1, max: 15 }),
             authorId: faker.helpers.arrayElement(usersData).id,
 			categoryId: faker.helpers.arrayElement(categoriesData).id,
             sources: ["https://www.example.com"],

@@ -1,8 +1,7 @@
 "use client";
 import { ArrowLeft, ArrowUpFromLine, Ellipsis, LoaderCircle, LogIn, LogOut, Pencil, Save, User as UserIcon } from "lucide-react";
 import { signIn, signOut, useSession } from "next-auth/react";
-import { Drawer, DrawerContent, DrawerTrigger } from "@/components/ui/drawer";
-import { DialogDescription, DialogHeader, DialogTitle } from "../../components/ui/dialog";
+import { Drawer, DrawerContent, DrawerDescription, DrawerHeader, DrawerTitle, DrawerTrigger } from "@/components/ui/drawer";
 import { Button, buttonVariants } from "../../components/ui/button";
 import { Dispatch, SetStateAction, useState } from "react";
 import ProfilePhoto from "@/components/profile-photo";
@@ -116,14 +115,14 @@ function ProfileContent({ user, isSettingsOpen, setIsSettingsOpen, update, isDes
                     </SheetDescription>
                 </SheetHeader>
             ) : (
-                <DialogHeader>
-                    <DialogTitle className="text-center text-3xl pt-2">
+                <DrawerHeader>
+                    <DrawerTitle className="text-center text-3xl pt-2">
                         {isSettingsOpen ? "Ayarlar" : "Profil"}
-                    </DialogTitle>
-                    <DialogDescription className="sr-only">
+                    </DrawerTitle>
+                    <DrawerDescription className="sr-only">
                         kullanıcı profili
-                    </DialogDescription>
-                </DialogHeader>
+                    </DrawerDescription>
+                </DrawerHeader>
             )}
             {!isSettingsOpen ?
                 (<>

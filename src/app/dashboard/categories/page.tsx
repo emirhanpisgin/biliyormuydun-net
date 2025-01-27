@@ -3,10 +3,10 @@ import { Input } from "@/components/ui/input";
 import { Search } from "lucide-react";
 import AddCategory from "./_components/add-category";
 import CategoryCard from "./_components/category-card";
-import { getCategories } from "./queries";
+import { getCategoriesUseCase } from "@/use-cases/categories";
 
 export default async function Categories() {
-    const categories = await getCategories();
+    const categories = await getCategoriesUseCase();
     // TODO: Add admin check
     // TODO: Sort categories alphabetically
 

@@ -24,7 +24,7 @@ export const addCategoryAction = authenticatedAction
 			if (!input.match(/^[a-zA-Z0-9ğüşöçıİĞÜŞÖÇ ]{4,20}$/))
 				return { success: false, message: "Lütfen geçerli bir kategori adı giriniz." };
 
-            await createCategoryUseCase(input, ctx.id);
+            await createCategoryUseCase(input);
 
             revalidatePath("/dashboard/categories");
 

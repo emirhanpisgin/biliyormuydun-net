@@ -10,6 +10,7 @@ import { Toaster } from "@/components/ui/toaster";
 import Navbar from "./_components/navbar";
 import { auth } from "@/lib/auth";
 import MaxWidthWrapper from "@/components/max-width-wrapper";
+import RandomBackground from "@/components/random-background";
 
 const geistSans = Geist({
     variable: "--font-geist-sans",
@@ -41,6 +42,7 @@ export default async function RootLayout({
                 className={`${geistSans.variable} ${geistMono.variable} antialiased`}
                 suppressHydrationWarning
             >
+                <RandomBackground />
                 <NextSSRPlugin
                     routerConfig={extractRouterConfig(ourFileRouter)}
                 />

@@ -22,7 +22,7 @@ export default function Navbar({ session }: NavbarProps) {
 
     return (
         <div className="hidden lg:block">
-            <div className="flex border rounded-lg p-4 gap-6 justify-end shadow-lg">
+            <div className="flex border rounded-lg p-4 gap-6 justify-end shadow-lg bg-background">
                 <div className="flex flex-1 gap-2">
                     <Link href={"/"} className="font-semibold text-xl">
                         Biliyor Muydun?

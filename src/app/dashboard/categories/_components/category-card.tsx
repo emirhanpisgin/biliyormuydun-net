@@ -28,7 +28,7 @@ export default function CategoryCard({ category: { name, id } }: CategoryCardPro
     })
 
     return (
-        <div className="border p-3 rounded-lg flex flex-col gap-2 shadow-lg">
+        <div className="border p-3 rounded-lg flex flex-col gap-2 shadow-lg bg-background">
             <div className="flex">
                 <div className="font-semibold text-lg line-clamp-1 flex-1">
                     {name}

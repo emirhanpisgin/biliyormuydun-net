@@ -14,7 +14,7 @@ import { User } from "@/db/schema/users";
 import { useToast } from "@/hooks/use-toast";
 import { useMediaQuery } from "@/hooks/use-media-query";
 import { Sheet, SheetContent, SheetDescription, SheetHeader, SheetTitle, SheetTrigger } from "@/components/ui/sheet";
-import { DropdownMenu, DropdownMenuContent, DropdownMenuItem, DropdownMenuLabel, DropdownMenuSeparator, DropdownMenuTrigger } from "@/components/ui/dropdown-menu";
+import { DropdownMenu, DropdownMenuContent, DropdownMenuItem, DropdownMenuSeparator, DropdownMenuTrigger } from "@/components/ui/dropdown-menu";
 import { Session } from "next-auth";
 
 interface ProfileButtonProps {

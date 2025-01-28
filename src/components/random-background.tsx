@@ -17,7 +17,9 @@ export default function RandomBackground() {
             iconSize = 48;
         }
 
-        const gridSize = iconSize * 1.75;
+        const iconDensity = 2;
+
+        const gridSize = iconSize * iconDensity;
 
         const screenWidth = window.innerWidth;
         const screenHeight = window.innerHeight;

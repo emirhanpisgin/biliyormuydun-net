@@ -38,7 +38,6 @@ export default function Scrollable({ children, className, ...props }: Scrollable
 
             const onMouseMove = (e: MouseEvent) => {
                 setMoving(true);
-                console.log("moving");
                 const diff = e.clientY - clientY;
                 const scrollableDiff = (diff / (clientHeight - scrollbarHeight)) * scrollableHeight;
                 scrollable.scrollTop = scrollTop + scrollableDiff;
@@ -46,7 +45,6 @@ export default function Scrollable({ children, className, ...props }: Scrollable
 
             const onMouseUp = () => {
                 setTimeout(() => setMoving(false), 300);
-                console.log("not moving");
                 document.removeEventListener("mousemove", onMouseMove);
                 document.removeEventListener("mouseup", onMouseUp);
             };
@@ -98,9 +96,7 @@ export default function Scrollable({ children, className, ...props }: Scrollable
                 {children}
             </div>
             <div ref={scrollbarRef} className="absolute hidden lg:block top-0 left-full m-1 w-2 h-full z-50">
-                <div ref={scrollbarThumbRef} className="bg-primary/10 rounded-lg hover:bg-primary/20 transition-colors">
-
-                </div>
+                <div ref={scrollbarThumbRef} className="bg-primary/30 rounded-lg hover:bg-primary/60 transition-colors" />
             </div>
         </div>
     );

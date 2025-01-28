@@ -17,7 +17,7 @@ export default function RandomBackground() {
             iconSize = 48;
         }
 
-        const iconDensity = 2;
+        const iconDensity = 1.75;
 
         const gridSize = iconSize * iconDensity;
 
@@ -45,7 +45,7 @@ export default function RandomBackground() {
                         left: posY,
                         width: `${iconSize}px`,
                         height: `${iconSize}px`,
-                        opacity: 0.4,
+                        opacity: Math.random() * 0.2,
                         rotate: `${Math.random() * 360}deg`,
                     }} />
                 );

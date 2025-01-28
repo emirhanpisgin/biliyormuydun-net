@@ -1,11 +1,11 @@
 "use client";
 
-import { Monitor, Volleyball, HeartPulse, Book, FlaskConical, Music, Plane, Utensils, Shirt, DollarSign, TvMinimalPlay, Leaf, Car, Gamepad2, Scale, Brain } from "lucide-react";
+import { Monitor, Volleyball, HeartPulse, Book, FlaskConical, Music, Plane, Utensils, Shirt, DollarSign, TvMinimalPlay, Leaf, Car, Gamepad2, Scale, Brain, Cat, Dog, PawPrint } from "lucide-react";
 import { useMediaQuery } from "@/hooks/use-media-query";
 import React from "react";
 
 export default function RandomBackground() {
-    const icons = [Monitor, FlaskConical, HeartPulse, Book, Volleyball, Music, Plane, Utensils, Shirt, DollarSign, TvMinimalPlay, Leaf, Car, Gamepad2, Scale, Brain];
+    const icons = [Monitor, FlaskConical, HeartPulse, Book, Volleyball, Music, Plane, Utensils, Shirt, DollarSign, TvMinimalPlay, Leaf, Car, Gamepad2, Scale, Brain, Cat, Dog, PawPrint ];
 
     let iconSize = 40;
 
@@ -17,24 +17,16 @@ export default function RandomBackground() {
             iconSize = 48;
         }
 
-        const gridSize = iconSize * 2;
+        const gridSize = iconSize * 1.75;
 
         const screenWidth = window.innerWidth;
         const screenHeight = window.innerHeight;
-        console.log(screenWidth);
-        console.log(screenHeight);
         const manualOffset = gridSize;
 
         const elements: React.ReactNode[] = [];
 
         for (let x = -manualOffset; x < (screenHeight + manualOffset); x += gridSize) {
             for (let y = -manualOffset; y < (screenWidth + manualOffset); y += gridSize) {
-                if(x < 0 && y < 0) {
-                    console.log(x, y);
-                }
-                if(x > screenWidth && y > screenHeight) {
-                    console.log(x, y);
-                }
                 const Icon = icons[Math.floor(Math.random() * icons.length)];
                 const minPosX = gridSize + x;
                 const minPosY = gridSize + y;

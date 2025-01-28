@@ -72,4 +72,14 @@ body {
 	svg {
 		stroke-width: 1.5;
 	}
+    .scrollable {
+        overflow: auto;
+        scrollbar-width: none;
+        -ms-overflow-style: none;
+        height: 100vh;
+    }
+
+    .scrollable::-webkit-scrollbar {
+        display: none;
+    }
 }

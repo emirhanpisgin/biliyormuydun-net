@@ -5,6 +5,7 @@ import AddTopic from "./_components/add-topic";
 import { getTopicsWithRelationsUseCase } from "@/use-cases/topics";
 import { getCategoriesUseCase } from "@/use-cases/categories";
 import TopicCard from "./_components/topic-card";
+import Scrollable from "@/components/scrollable";
 
 export default async function Topics() {
     const topicsWithRelations = await getTopicsWithRelationsUseCase();
@@ -27,14 +28,14 @@ export default async function Topics() {
                 </div>
                 <AddTopic categories={categories} />
             </div>
-            <div className="flex flex-col gap-2 pb-32">
+            <Scrollable className="flex flex-col gap-2 pb-32">
                 {topicsWithRelations.map((topic) => (
                     <TopicCard data={topic} key={topic.id} />
                 ))}
                 {topicsWithRelations.length === 0 && (
                     <div className="text-center text-muted-foreground py-16">Henüz konu eklenmemiş.</div>
                 )}
-            </div>
+            </Scrollable>
         </div>
     );
 }

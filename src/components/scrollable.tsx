@@ -91,7 +91,7 @@ export default function Scrollable({ children, className, ...props }: Scrollable
     }, []);
 
     return (
-        <div {...props} className="flex flex-col relative h-[calc(100vh-8rem)]">
+        <div {...props} className="flex flex-col relative h-[calc(100vh-10rem)]">
             <div ref={scrollableRef} className={cn("scrollable relative flex-1", className)}>
                 {children}
             </div>

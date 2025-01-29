@@ -1,13 +1,10 @@
-import { pgTable, text } from "drizzle-orm/pg-core";
+import { pgTable, text, uuid } from "drizzle-orm/pg-core";
 import { relations } from "drizzle-orm";
 import { Topic, topics } from "./topics";
 
 export const categories = pgTable("category", {
-	id: text("id")
-		.primaryKey()
-		.notNull()
-		.$defaultFn(() => crypto.randomUUID()),
-	name: text("name").notNull(),
+	id: uuid().primaryKey().defaultRandom(),
+	name: text().notNull(),
 });
 
 export const categoryRelations = relations(categories, ({ many }) => ({

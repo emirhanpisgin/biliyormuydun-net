@@ -13,7 +13,7 @@ export default async function Topics() {
 
     return (
         <div className="w-full flex flex-col gap-2">
-            <div className="flex gap-2 pt-2">
+            <div className="flex gap-2 p-2 mt-2 border bg-background rounded-lg">
                 <div className="text-xl font-semibold hidden lg:flex items-center">
                     Konular
                 </div>

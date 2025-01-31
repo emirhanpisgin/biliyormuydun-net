@@ -14,9 +14,7 @@ export default async function Topics() {
     return (
         <div className="w-full flex flex-col gap-2">
             <div className="flex gap-2 p-2 mt-2 border bg-background rounded-lg shadow-lg">
-                <div className="text-xl font-semibold hidden lg:flex items-center">
-                    Konular
-                </div>
+                <div className="text-xl px-3 font-semibold hidden lg:flex items-center">Konular</div>
                 <div className="flex justify-center flex-1">
                     <div className="w-full lg:w-1/2 flex gap-2">
                         <Input className="flex-1" placeholder="Konu Başlığı..." />
@@ -32,9 +30,7 @@ export default async function Topics() {
                 {topicsWithRelations.map((topic) => (
                     <TopicCard data={topic} key={topic.id} />
                 ))}
-                {topicsWithRelations.length === 0 && (
-                    <div className="text-center text-muted-foreground py-16">Henüz konu eklenmemiş.</div>
-                )}
+                {topicsWithRelations.length === 0 && <div className="text-center text-muted-foreground py-16">Henüz konu eklenmemiş.</div>}
             </Scrollable>
         </div>
     );

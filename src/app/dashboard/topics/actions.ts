@@ -8,29 +8,30 @@ import { revalidatePath } from "next/cache";
 import { z } from "zod";
 
 export const createTopicAction = authenticatedAction
-	.createServerAction()
-	.input(
-		z.object({
-			title: z.string(),
-			slug: z.string(),
-			content: z.string(),
-			sources: z.array(z.string()),
-			categoryId: z.string(),
-		})
-	)
-	.handler(async ({ ctx, input }) => {
-		try {
-			const { title, slug, content, sources, categoryId } = input;
+    .createServerAction()
+    .input(
+        z.object({
+            title: z.string(),
+            slug: z.string(),
+            content: z.string(),
+            sources: z.array(z.string()),
+            categoryId: z.string(),
+        })
+    )
+    .handler(async ({ ctx, input }) => {
+        try {
+            const { title, slug, content, sources, categoryId } = input;
 
-            if(!title.match(/^[a-zA-Z0-9_ğüşöçıİĞÜŞÖÇ ]{30,200}$/)) return { success: false, message: "Lütfen geçerli bir başlık giriniz." };
+            if (!title.match(/^[a-zA-Z0-9_ğüşöçıİĞÜŞÖÇ ]{30,200}$/)) return { success: false, message: "Lütfen geçerli bir başlık giriniz." };
 
-            if(!slug.match(/^[a-z0-9-]{3,100}$/)) return { success: false, message: "Lütfen geçerli bir url giriniz." };
+            if (!slug.match(/^[a-z0-9-]{3,100}$/)) return { success: false, message: "Lütfen geçerli bir url giriniz." };
 
-            if(!content.match(/^[a-zA-Z0-9_ğüşöçıİĞÜŞÖÇ ]{0,300}$/)) return { success: false, message: "Lütfen geçerli bir içerik giriniz." };
+            if (!content.match(/^[a-zA-Z0-9_ğüşöçıİĞÜŞÖÇ ]{0,300}$/)) return { success: false, message: "Lütfen geçerli bir içerik giriniz." };
 
-            if(!sources.length) return { success: false, message: "Lütfen en az bir kaynak giriniz." };
+            if (!sources.length) return { success: false, message: "Lütfen en az bir kaynak giriniz." };
 
-            if(!sources.every((source: string) => source.match(/^(https?:\/\/)?([\da-z.-]+)\.([a-z.]{2,6})([/\w .-]*)*\/?$/))) return { success: false, message: "Lütfen geçerli kaynaklar giriniz." };
+            if (!sources.every((source: string) => source.match(/^(https?:\/\/)?([\da-z.-]+)\.([a-z.]{2,6})([/\w .-]*)*\/?$/)))
+                return { success: false, message: "Lütfen geçerli kaynaklar giriniz." };
 
             const category = await database.query.categories.findFirst({
                 where: eq(categories.id, categoryId),
@@ -38,22 +39,22 @@ export const createTopicAction = authenticatedAction
 
             if (!category) return { success: false, message: "Seçtiğiniz kategori bulunamadı." };
 
-			const topic = await database.query.topics.findFirst({
-				where: eq(topics.slug, slug),
-			});
+            const topic = await database.query.topics.findFirst({
+                where: eq(topics.slug, slug),
+            });
 
-			if (topic) return { success: false, message: `Konu kimliği \"${slug}\" zaten mevcut.` };
+            if (topic) return { success: false, message: `Konu kimliği \"${slug}\" zaten mevcut.` };
 
-			await createTopicUseCase({...input, authorId: ctx.id});
+            await createTopicUseCase({ ...input, authorId: ctx.id });
 
             revalidatePath("/");
 
-			return { success: true, message: "Konu başarıyla eklendi." };
-		} catch (error) {
+            return { success: true, message: "Konu başarıyla eklendi." };
+        } catch (error) {
             console.log(error);
-			return { success: false, message: "Bir hata oluştu, lütfen daha sonra tekrar deneyin." };
-		}
-	});
+            return { success: false, message: "Bir hata oluştu, lütfen daha sonra tekrar deneyin." };
+        }
+    });
 
 export const deleteTopicAction = authenticatedAction
     .createServerAction()

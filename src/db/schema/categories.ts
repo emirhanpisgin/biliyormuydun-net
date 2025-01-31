@@ -1,6 +1,7 @@
 import { pgTable, text, uuid } from "drizzle-orm/pg-core";
 import { relations } from "drizzle-orm";
 import { Topic, topics } from "./topics";
+import { blogs } from "./blogs";
 
 export const categories = pgTable("category", {
 	id: uuid().primaryKey().defaultRandom(),
@@ -9,6 +10,7 @@ export const categories = pgTable("category", {
 
 export const categoryRelations = relations(categories, ({ many }) => ({
 	topics: many(topics),
+	blogs: many(blogs),
 }));
 
 export type Category = typeof categories.$inferSelect;

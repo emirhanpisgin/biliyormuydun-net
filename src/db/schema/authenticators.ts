@@ -1,33 +1,33 @@
-import { boolean, integer, pgTable, primaryKey, text } from "drizzle-orm/pg-core";
+import { boolean, integer, pgTable, primaryKey, text, uuid } from "drizzle-orm/pg-core";
 import { users } from "./users";
 import { relations } from "drizzle-orm";
 
 export const authenticators = pgTable(
-	"authenticator",
-	{
-		credentialID: text("credentialID").notNull().unique(),
-		userId: text("userId")
-			.notNull()
-			.references(() => users.id, { onDelete: "cascade" }),
-		providerAccountId: text("providerAccountId").notNull(),
-		credentialPublicKey: text("credentialPublicKey").notNull(),
-		counter: integer("counter").notNull(),
-		credentialDeviceType: text("credentialDeviceType").notNull(),
-		credentialBackedUp: boolean("credentialBackedUp").notNull(),
-		transports: text("transports"),
-	},
-	(authenticator) => [
-		{
-			compositePK: primaryKey({
-				columns: [authenticator.userId, authenticator.credentialID],
-			}),
-		},
-	]
+    "authenticator",
+    {
+        credentialID: text().notNull().unique(),
+        userId: uuid()
+            .notNull()
+            .references(() => users.id, { onDelete: "cascade" }),
+        providerAccountId: text().notNull(),
+        credentialPublicKey: text().notNull(),
+        counter: integer().notNull(),
+        credentialDeviceType: text().notNull(),
+        credentialBackedUp: boolean().notNull(),
+        transports: text(),
+    },
+    (authenticator) => [
+        {
+            compositePK: primaryKey({
+                columns: [authenticator.userId, authenticator.credentialID],
+            }),
+        },
+    ]
 );
 
 export const authenticatorsRelations = relations(authenticators, ({ one }) => ({
-	user: one(users, {
-		fields: [authenticators.userId],
-		references: [users.id],
-	}),
+    user: one(users, {
+        fields: [authenticators.userId],
+        references: [users.id],
+    }),
 }));
